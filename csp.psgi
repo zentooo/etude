@@ -9,20 +9,6 @@ use Amon2::Lite;
 
 our $VERSION = '0.01';
 
-# put your configuration here
-sub load_config {
-    my $c = shift;
-
-    my $mode = $c->mode_name || 'development';
-
-    +{
-        'DBI' => [
-            'dbi:SQLite:dbname=$mode.db',
-            '',
-            '',
-        ],
-    }
-}
 
 get '/' => sub {
     my $c = shift;
