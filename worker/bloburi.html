@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="script/audioworker.js"></script>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("send").addEventListener("click", function() {
+                var form1 = document.getElementById("form1");
+
+                var file = form1.children[0].files[0];
+                var url = window.URL ? URL : webkitURL;
+                var blobUrl = url.createObjectURL(file);
+
+                var worker = new Worker("script/audioworker.js");
+                worker.addEventListener("message", function(evt) {
+                    console.log("message from worker");
+                    console.dir(evt);
+                });
+                worker.postMessage(blobUrl);
+            }, false);
+        }, false);
+    </script>
+</head>
+
+<body>
+    <form id="form1" action="">
+        <input type="file" name="file1"/>
+        <input type="button" id="send" value="send" />
+    </form>
+</body>
+</html>
