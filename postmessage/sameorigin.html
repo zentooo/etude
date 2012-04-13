@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        html {
+            background-color: white;
+            color: black;
+        }
+    </style>
+    <script type="text/javascript">
+        window.addEventListener("message", function(evt) {
+            console.dir(evt);
+            var dump = document.getElementById("dump");
+            dump.innerHTML += "data = " + evt.data + "<br/>";
+            dump.innerHTML += "origin = " + evt.origin + "<br/>";
+
+            var audio = new Audio(evt.data);
+            audio.addEventListener("play", function() {
+                alert("play start!");
+            });
+            audio.play();
+        });
+    </script>
+</head>
+<body>
+    this is grandchild frame
+    <br />
+    <br />
+    <div id="dump">
+</body>
+</html>

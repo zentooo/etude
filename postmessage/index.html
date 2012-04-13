@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        iframe { width: 600px; height: 400px }
+    </style>
+    <script type="text/javascript">
+        window.addEventListener("load", function() {
+            frames[0].postMessage("Hello, World!", "http://localhost:14000");
+
+            document.getElementById("send").addEventListener("click", function() {
+                var form1 = document.getElementById("form1");
+
+                var file = form1.children[0].files[0];
+                var url = window.URL ? URL : webkitURL;
+                var blobUrl = url.createObjectURL(file);
+
+                frames[0].postMessage(blobUrl, "http://localhost:14000");
+                frames[0].frames[0].postMessage(blobUrl, "http://localhost:13000");
+            }, false);
+        }, false);
+    </script>
+</head>
+
+<body>
+    <form id="form1" action="">
+        <input type="file" name="file1"/>
+        <input type="button" id="send" value="send" />
+    </form>
+    this is parent frame
+    <iframe src="http://localhost:14000/frame.html" frameborder="0"></iframe>
+</body>
+</html>

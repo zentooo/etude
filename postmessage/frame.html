@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        html {
+            background-color: black;
+            color: white;
+        }
+        iframe { width: 300px; height: 200px }
+    </style>
+    <script type="text/javascript">
+        window.addEventListener("message", function(evt) {
+            console.dir(evt);
+            var dump = document.getElementById("dump");
+            dump.innerHTML += "data = " + evt.data + "<br/>";
+            dump.innerHTML += "origin = " + evt.origin + "<br/>";
+
+            //var audio = new Audio(evt.data);
+            //audio.addEventListener("play", function() {
+            //    alert("play start!");
+            //});
+            //audio.play();
+        });
+    </script>
+</head>
+<body>
+    this is child frame
+    <br />
+    <br />
+    <div id="dump">
+    </div>
+    <iframe src="http://localhost:13000/sameorigin.html" frameborder="0"></iframe>
+</body>
+</html>
